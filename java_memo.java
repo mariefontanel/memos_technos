@@ -175,3 +175,115 @@ do {//Boucle principale
 } while (reponse == 'O');
                 
 System.out.println("Au revoir !");
+
+
+______________________________________COLLECTIONS (objet) & MAP (couple Clé-Valeur)
+
+------------------------------------------INTERACE LIST / MAP (implémentations ArrayList  et HashMap )
+ARRAYLIST :
+
+add() permet d''ajouter un élément ;
+
+get(int index) retourne l''élément à l''indice demandé ;
+
+remove(int index) efface l''entrée à l''indice demandé ;
+
+isEmpty() renvoie « vrai » si l''objet est vide ;
+
+removeAll() efface tout le contenu de l''objet ;
+
+contains(Object element) retourne « vrai » si l''élément passé en paramètre est dans l''ArrayList.
+
+
+
+exemple:
+
+import java.util.*;
+
+public class Olympics {
+
+  public static void main(String[] args) {
+
+    //Some Olympic sports 
+
+    ArrayList<String> olympicSports = new ArrayList<String>();
+    olympicSports.add("Archery");
+    olympicSports.add("Boxing");
+    olympicSports.add("Cricket");
+    olympicSports.add("Diving");
+
+    System.out.println("There are " + olympicSports.size() + " Olympic sports in this list. They are: ");
+
+    for (String sport: olympicSports) { // FOREACH = concise version of a for loop
+      System.out.println(sport);
+    }
+
+    //Host cities and the year they hosted the summer Olympics
+
+    HashMap<String, Integer> hostCities = new HashMap<String, Integer>();
+
+    hostCities.put("Beijing", 2008);
+    hostCities.put("London", 2012);
+    hostCities.put("Rio de Janeiro", 2016);
+
+    for (String city: hostCities.keySet()) {
+      
+      if (hostCities.get(city) < 2016) {
+
+        System.out.println(city + " hosted the summer Olympics in " + hostCities.get(city) + ".");
+
+      } else {
+
+        System.out.println(city + " will host the summer Olympics in " + hostCities.get(city) + ".");
+
+      }
+    }
+
+  }
+
+}
+
+For Loops: used to repeatedly run a block of code
+For Each Loops: a concise version of a for loop
+ArrayList: stores a list of data
+HashMap: stores keys and associated values like a dictionary
+
+------------------------------------------INTERFACE SET ( implémentation HashSet + Iterator )
+
+import java.util.HashSet;
+import java.util.Iterator;
+ 
+public class Test { 
+  public static void main(String[] args) {         
+    HashSet hs = new HashSet();
+    hs.add("toto");
+    hs.add(12);
+    hs.add('d');
+
+    Iterator it = hs.iterator();
+    while(it.hasNext())
+      System.out.println(it.next());
+ 
+    System.out.println("\nParcours avec un tableau d'objet");
+    System.out.println("-----------------------------------");
+                
+    Object[] obj = hs.toArray();
+    for(Object o : obj)
+      System.out.println(o);                
+  }
+}
+
+
+HASHSET:
+
+add() ajoute un élément ;
+
+contains(Object value) retourne « vrai » si l''objet contient value ;
+
+isEmpty() retourne « vrai » si l''objet est vide ;
+
+iterator() renvoie un objet de type Iterator ;
+
+remove(Object o) retire l''objet o de la collection ;
+
+toArray() retourne un tableau d''Object.
