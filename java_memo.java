@@ -287,3 +287,77 @@ iterator() renvoie un objet de type Iterator ;
 remove(Object o) retire l''objet o de la collection ;
 
 toArray() retourne un tableau d''Object.
+
+-----------------------------JDBC - TRAITEMENT DES DONNEES
+
+package fr;
+
+import java.sql.*;
+import java.util.Scanner;
+
+public class Connect {
+
+  // atttribution des variables utiles pour la connexion
+    private String url = "jdbc:mysql://localhost:3306/java_crm?serverTimezone=UTC"; // lien de la table java_crm distante
+    private String user = "root";
+    private String passwd = "Adminmysql";
+
+
+    public Connect() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // utilisation du Driver de connexion que l'on importe dans les librairies externes de l'IDE
+            System.out.println("Driver O.K.");
+
+            Connection conn = DriverManager.getConnection(url, user, passwd);
+            System.out.println("Connexion effective !\n");
+
+            System.out.println("Catalogue de produits");
+
+            //Création d'un objet Statement
+            Statement state = conn.createStatement();
+
+            Scanner keyboard = new Scanner(System.in);
+
+            System.out.println("Saisir la ref du produit à afficher");
+            String refProduct = keyboard.nextLine();
+
+
+            ResultSet resultSet = state.executeQuery("SELECT * FROM products WHERE ref ='"+refProduct+"'"); // requete pour récupérer un produit selon sa ref
+
+            while(resultSet.next()) {
+              // variables utiles pour l'affichage de la requete
+                String name = resultSet.getString("name");
+                int id = resultSet.getInt("id");
+                String price = resultSet.getString("price");
+
+                System.out.println("le produit qui a la référence p02 est " + name + " , il a l'id : " + id + " et coûte " + price + " € !");
+            }
+
+            resultSet.close();
+            state.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+--------------------------------------Exception
+//coder le message et la condition
+if () {
+  throw new IllegalArgumentException("la condition doit être respectée !");
+}
+else {
+
+}
+
+//mettre le try catch ou le code sera exécuté
+try {
+  //code
+}
+catch(IllegalArgumentException e) {
+  System.out.println(e.getMessage());
+  // ou e.printStackTrace(); // donne + d'infos sur l'exception, comme les lignes de code qui posent pb dans quel fichier !
+}
+
+
